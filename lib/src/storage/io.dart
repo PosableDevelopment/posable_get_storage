@@ -137,7 +137,9 @@ class StorageImpl {
 
   Future<Directory> _getImplicitDir() async {
     try {
-      return getApplicationDocumentsDirectory();
+      return (Platform.isAndroid || Platform.isIOS)
+          ? getApplicationDocumentsDirectory()
+          : getApplicationSupportDirectory();
     } catch (err) {
       throw err;
     }
